@@ -28,7 +28,9 @@ const Programs =()=>{
     return(
         <div className="profile-container">
         <Card style={{width:"100%"}}>
-            <Card.Grid hoverable={false}  style={{width:"35%",padding:"100px 20px 20px 20px",border:"solid 2px white"}}>
+            <Card.Grid hoverable={false}  style={{width:"100%",padding:"100px 30px 30px 30px",border:"solid 2px white",display:"flex"}}>
+                <div>
+
                 <h1 style={{fontSize:"60px",color:"green", fontWeight:"bold",border:"white"}}> Our Program </h1>
                 <p style={{fontSize:"20px",padding:"10px",border:"solid 2px white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
            
@@ -38,20 +40,22 @@ const Programs =()=>{
       size="large"
       suffix={suffix}
       onSearch={onSearch}
-     style={{color:"green"}}
+     style={{color:"green",width:"60%"}}
     />
-            </Card.Grid>
-            <Card.Grid hoverable={false} style={{width:"65%",boxShadow:"2px white",border:"solid 2px white"}}>
-            <img src={image1} alt="image" width="100%"/>
+                </div>
+                <div>
+
+    <img src={image1} alt="image" width="100%"/>
+                </div>
             </Card.Grid>
         </Card>
         <Card style={{width:"100%"}}>
-            <Card.Grid hoverable={false}  style={{width:"35%"}}>
-                <img src={image2} alt="image" width="100%"/>
-            </Card.Grid>
-            <Card.Grid hoverable={false} style={{width:"65%"}}>
+            <Card.Grid hoverable={false}  style={{width:"100%",display:"flex",padding:"50px"}}>
+                <img src={image2} alt="image" width="70%"/>
+           <div>
                 <h1 style={{fontSize:"60px",color:"green", fontWeight:"bold",border:"white"}}> Scheduler your Session </h1>
                 <p style={{fontSize:"20px",padding:"10px",border:"white"}}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus, vel sollicitudin pulvinar. Porttitor lobortis arcu interdum neque enim.</p>
+                </div>
             </Card.Grid>
         </Card>
             <Card style={{width:"100%"}}>

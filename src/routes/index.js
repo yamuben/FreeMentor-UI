@@ -7,7 +7,7 @@ import Home from "../views/home";
 const Index=()=>{
     return(
         <Switch>
-            <Route component={Home} path={["/home","/"]} />
+        <Route component={Home} path={["/home","/"]} />
         </Switch>
     )
 }
