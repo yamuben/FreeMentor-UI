@@ -4,6 +4,7 @@ import {Menu,Modal} from "antd";
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import "./index.css";
 import 'antd/dist/antd.css';
+import {Link} from "react-router-dom";
 
 import SigninForm from "./SigninForm";
 
@@ -44,12 +45,15 @@ const Header = ()=>{
            <h1 style={{color:"green", fontSize:"30px",fontWeight:"bolder"}}> FREE MENTOR</h1>
 
 
-      <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{margin:"0px 0px 0px 60%"}}>
+      <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{margin:"0px 0px 0px 40%"}}>
         <Menu.Item key="home" >
-         Home
+   
+        <Link to="/">
+         Home</Link>
         </Menu.Item>
-        <Menu.Item key="about" >
-         About Us
+        <Menu.Item key="mentors" >
+          <Link onClick={handleClick} to="/allmentors">
+         All Mentors</Link>
         </Menu.Item>
         <Menu.Item key="login" onClick={showModal}>
          Login
