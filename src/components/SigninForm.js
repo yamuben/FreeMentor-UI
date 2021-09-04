@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import {Link} from "react-router-dom";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 const SigninForm = () => {
@@ -41,9 +42,12 @@ const SigninForm = () => {
       </Form.Item>
 
       <Form.Item>
+          <Link to="/dashboard">
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
+          
+          </Link>
         Or <a href="">register now!</a>
       </Form.Item>
     </Form>
