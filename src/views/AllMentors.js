@@ -8,7 +8,7 @@ import Mentors from "../components/Mentors";
 const AllMentors =()=>{
     return(
         <>
-        <Header/>
+        {/* <Header/> */}
         <Mentors/>
         </>
     )
