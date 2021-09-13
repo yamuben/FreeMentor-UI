@@ -6,7 +6,7 @@ import OurProfile from "../components/OurProfile";
 const Home =()=>{
     return (
         <div>
-            <Header/>
+            {/* <Header/> */}
             <OurProfile/>
         </div>
     )

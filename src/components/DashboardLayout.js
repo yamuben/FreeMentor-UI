@@ -24,7 +24,7 @@ const DashboardLayout =({children})=> {
 
     return(
     <>
-        <MyHeader/>
+        {/* <MyHeader/> */}
         <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed} style={{height:"95vh"}}>
           <div className="logo" />

@@ -42,8 +42,8 @@ const Header = ()=>{
 </div>
     </Modal>
        <div className="header-container" style={{display: 'flex'}}>
-           <h1 style={{color:"green", fontSize:"30px",fontWeight:"bolder"}}> FREE MENTOR</h1>
-
+        <Link to="/home">   <h1 style={{color:"green", fontSize:"30px",fontWeight:"bolder"}}> FREE MENTOR</h1>
+        </Link>
 
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{margin:"0px 0px 0px 40%"}}>
         <Menu.Item key="home" >

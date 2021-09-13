@@ -1,11 +1,27 @@
 import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
-import {Link} from "react-router-dom";
+import { Form, Input, Button, Checkbox,notification } from 'antd';
+import {Link,useHistory} from "react-router-dom";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import AuthApi from "../services/Auth";
 
 const SigninForm = () => {
-  const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  const history = useHistory();
+
+  const onFinish = async(values) => {
+  const response= await AuthApi.login(values);
+  console.log("response:" ,response);
+  if(!response){
+    return notification.error({message:"Invalid credentials, Please try again!!"})
+  
+  }
+  if(response.data.status===200){
+
+    return history.push("/dashboard")
+  }
+  else{
+return notification.error({message:"Invalid credentials, Please try again!!"})
+  }
+    // console.log('Received values of form: ', values);
   };
 
   return (
@@ -16,8 +32,8 @@ const SigninForm = () => {
       onFinish={onFinish}
     >
       <Form.Item
-        name="username"
-        rules={[{ required: true, message: 'Please input your Username!' }]}
+        name="email"
+        rules={[{ required: true, message: 'Please input your Email!' }]}
       >
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
       </Form.Item>
@@ -42,13 +58,13 @@ const SigninForm = () => {
       </Form.Item>
 
       <Form.Item>
-          <Link to="/dashboard">
+          {/* <Link to="/dashboard"> */}
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
           
-          </Link>
-        Or <a href="">register now!</a>
+          {/* </Link> */}
+        Or  <a href="/signup">register now!</a>
       </Form.Item>
     </Form>
   );
