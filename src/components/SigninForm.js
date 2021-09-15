@@ -16,6 +16,7 @@ const SigninForm = () => {
   }
   if(response.data.status===200){
 
+    localStorage.setItem("freeMentor_token",response.data.token);
     return history.push("/dashboard")
   }
   else{
