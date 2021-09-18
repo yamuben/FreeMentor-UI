@@ -11,16 +11,18 @@ const SigninForm = () => {
   const response= await AuthApi.login(values);
   console.log("response:" ,response);
   if(!response){
-    return notification.error({message:"Invalid credentials, Please try again!!"})
+    return notification.error({message:"request failed, Network error"});
   
   }
   if(response.data.status===200){
 
+    notification.success({message:response.data.message});
     localStorage.setItem("freeMentor_token",response.data.token);
-    return history.push("/dashboard")
+    history.push("/dashboard")
+    return  window.location.reload();
   }
   else{
-return notification.error({message:"Invalid credentials, Please try again!!"})
+return notification.error({message:response.data.message})
   }
     // console.log('Received values of form: ', values);
   };
