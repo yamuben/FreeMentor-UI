@@ -14,7 +14,9 @@ class AuthApi{
             const res= await axios.post(FREEMENTOR_API_AUTH+"/signin",data,config);
             return res;
         } catch (error) {
-            console.log(error);
+            console.log(  error.response);
+
+            return error.response;
         }
 
     }
@@ -26,6 +28,7 @@ class AuthApi{
             return res;
         } catch (error) {
             console.log(error);
+            return error.response;
         }
 
     }

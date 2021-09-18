@@ -1,26 +1,28 @@
 import React from 'react';
 import { Form, Input, Button,Card, Checkbox ,InputNumber, Select,notification} from 'antd';
-import {Link} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import Auth from "../services/Auth";
 
 const {Option}=Select;
 
 const SignupForm = () => {
+const history = useHistory();
   const onFinish = async(values) => {
     console.log('Received values of form: ', values);
    const response= await Auth.signup(values);
    if(!response){
-     return notification.error({message:"Failed to signup"});
+     return notification.error({message:"network error, Failed to make request"});
 
    }
 
    if(response.data.statu===200){
      notification.success({message:"Registered succesfuly"});
 
+     return history.push("/home");
    }
    else{
-    return notification.error({message:"Failed to signup, please try again."});
+    return notification.error({message:response.data.message});
    }
   //  console.log("response",response);
 
