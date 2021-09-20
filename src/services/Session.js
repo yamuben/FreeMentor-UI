@@ -23,6 +23,21 @@ class SessionApis{
 
     }
 
+    async getAllSessions(id){
+        try{
+const res = await axios.get(FREEMENTOR_API_SESSION+"/all/"+id,config)
+return res;
+        }catch(error){
+
+            return error.response;
+            
+       
+        }
+
+    }
+
+
+
 }
 
 export default new SessionApis();
