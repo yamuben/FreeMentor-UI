@@ -1,8 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './index.css';
-import data from "../assets/constants/sessions.json";
+
+import SessionAPI from "../services/Session";
+import dataFromToken from "../utils/tokenDecoder";
 
 import Session from "../components/Session";
 import SessionProfile from "../components/SessionProfile";
@@ -18,9 +20,10 @@ import {
 
 const Dashboard = () => {
 
-    const [session,setSession]=useState({});
+    const [session, setSession] = useState({});
     const [isModalVisible, setIsModalVisible] = useState(false);
 
+    const [data, setData] = useState([]);
     const [visible, setVisible] = useState(false);
 
     const showModal = () => {
@@ -85,7 +88,7 @@ const Dashboard = () => {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <a onClick={()=>{setVisible(true); setSession(record)}}>View</a>
+                    <a onClick={() => { setVisible(true); setSession(record) }}>View</a>
                     <a>Delete</a>
                     <a>Edit</a>
                 </Space>
@@ -93,6 +96,18 @@ const Dashboard = () => {
         },
     ];
 
+    const token = localStorage.getItem("freeMentor_token");
+
+
+    useEffect(() => {
+        SessionAPI.getAllSessions(dataFromToken(token).id).then((response) => {
+            
+            // console.log(response.data.data) ;
+            setData(response.data.data);
+        
+        });
+
+    });
     return (
         <>
             <DashboardLayout>
@@ -109,7 +124,7 @@ const Dashboard = () => {
                 </Modal>
 
             </DashboardLayout>
-            
+
             <Drawer
                 width={640}
                 placement="right"
@@ -117,7 +132,7 @@ const Dashboard = () => {
                 onClose={onClose}
                 visible={visible}
             >
-            <SessionProfile session={session} />
+                <SessionProfile session={session} />
             </Drawer>
         </>
     )

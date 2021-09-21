@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState, useEffect }from 'react';
 
 import {
     Form, Modal,
@@ -8,12 +8,15 @@ import {
     DatePicker
 } from 'antd';
 import {useHistory} from "react-router-dom";
-import mentors from "../assets/constants/mentors.json";
+import AuthApi from "../services/Auth"; 
+
 import SessionApis from "../services/Session";
 
 const { Option } = Select;
 
 const Session = () => {
+
+    const [mentors,setMentors]=useState([]);
  const history = useHistory();
 
 function onChange(value) {
@@ -48,6 +51,9 @@ return notification.error({message:"Network error!! failed to request."})
     console.log(values);
 }
 
+useEffect(() => {
+AuthApi.getAllMentors().then((response)=>{setMentors(response.data.dat)});
+},[mentors])
     return (
         <Form
             labelCol={{
@@ -84,7 +90,7 @@ return notification.error({message:"Network error!! failed to request."})
                 >
                     {
                         mentors.map((mentor) => (
-                            <Option value={mentor._id}>{mentor.firstName}</Option>
+                            <Option value={mentor._id}>{mentor.firstName}  {mentor.lastName} </Option>
                         ))
                     }
 
