@@ -1,10 +1,12 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import {Card} from 'antd';
 import 'antd/dist/antd.css';
 import { List, Avatar, Space } from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 
-import allMentors from "../assets/constants/mentors.json";
+// import allMentors from "../assets/constants/mentors.json";
+
+import AuthApi from "../services/Auth";
 
 
 
@@ -17,6 +19,12 @@ const IconText = ({ icon, text }) => (
   );
 
 const Mentors =()=>{
+  const [allMentors,setAllMentors] =useState([]);
+
+  useEffect(() => {
+    AuthApi.getAllMentors().then((res)=>{setAllMentors(res.data.dat)});
+  },[])
+
     return(
 <Card>
 <List
