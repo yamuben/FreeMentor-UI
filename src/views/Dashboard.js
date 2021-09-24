@@ -11,7 +11,7 @@ import SessionProfile from "../components/SessionProfile";
 import DashboardLayout from "../components/DashboardLayout";
 import {
     Modal, Tag, Space,
-    Button, Table, Drawer
+    Button, Table, Drawer, notification
 } from 'antd';
 
 
@@ -20,6 +20,8 @@ import {
 
 const Dashboard = () => {
 
+
+    const token = localStorage.getItem("freeMentor_token");
     const [session, setSession] = useState({});
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -86,33 +88,48 @@ const Dashboard = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (text, record) => (
-                <Space size="middle">
-                    <a onClick={() => { setVisible(true); setSession(record) }}>View</a>
-                    <a>Delete</a>
-                    <a>Edit</a>
-                </Space>
-            ),
+            render: (text, record) => {
+                const deleteSession = async (id) => {
+                    const response = await SessionAPI.deleteOneSession(id);
+                    console.log("response:", response);
+                    if (!response) {
+                        return notification.error({ message: "failed to respond!" })
+                    }
+                    return notification.success({ message: "success deleted" })
+
+                }
+                return (
+                    <Space size="middle">
+                        <a onClick={() => { setVisible(true); setSession(record) }}>View</a>
+                      { dataFromToken(token).role=="user" ? ( <>
+                      <a onClick={() => { deleteSession(record._id) }}>Delete</a>
+                        <a>Edit</a> </>):(
+<>
+<a style={{color:"green"}}>Accept</a>
+<a style={{color:"red"}}>Decline</a>
+ </>
+                        )}
+                    </Space>
+                )
+            },
         },
     ];
-
-    const token = localStorage.getItem("freeMentor_token");
 
 
     useEffect(() => {
         SessionAPI.getAllSessions(dataFromToken(token).id).then((response) => {
-            
+
             // console.log(response.data.data) ;
             setData(response.data.data);
-        
+
         });
 
-    });
+    },[]);
     return (
         <>
             <DashboardLayout>
 
-                <Button onClick={showModal}>Create Session</Button>
+                {dataFromToken(token).role=="mentor"? (<></>): (<Button onClick={showModal}>Create Session</Button>)}
 
                 <Table columns={columns} dataSource={data} />
 

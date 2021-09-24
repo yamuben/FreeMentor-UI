@@ -57,7 +57,6 @@ useEffect(() => {
        <div className="header-container" style={{display: 'flex'}}>
         <Link to="/home">   <h1 style={{color:"green", fontSize:"30px",fontWeight:"bolder"}}> FREE MENTOR</h1>
         </Link>
-
       <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal" style={{margin:"0px 0px 0px 35%",width:"50%"}}>
         <Menu.Item key="home" >
    
@@ -72,10 +71,15 @@ useEffect(() => {
         (<Menu.Item key="login" onClick={showModal}>
          Login
         </Menu.Item>):
-        (<Menu.Item key="logout" onClick={()=>{localStorage.removeItem("freeMentor_token")}}>
-        <Link to="/home">Logout</Link>
-        </Menu.Item>)}
+        (<>
+        
+        <Menu.Item key="logout" onClick={()=>{localStorage.removeItem("freeMentor_token")}}>
+      <Link to="/home">Logout</Link>
+        </Menu.Item>
+        </>)}
       </Menu>
+
+      <p> {!token?(<></>):(<>{decode(token).email}</>)} </p>
        </div>
        </>
     )
