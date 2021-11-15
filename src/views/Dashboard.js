@@ -102,7 +102,7 @@ const Dashboard = () => {
                     <Space size="middle">
                         <a onClick={() => { setVisible(true); setSession(record) }}>View</a>
                       { dataFromToken(token).role=="user" ? ( <>
-                      <a onClick={() => { deleteSession(record._id) }}>Delete</a>
+                      <a onClick={() => { deleteSession() }}>Delete</a>
                         <a>Edit</a> </>):(
 <>
 <a style={{color:"green"}}>Accept</a>

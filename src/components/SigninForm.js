@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { Form, Input, Button, Checkbox,notification } from 'antd';
 import {Link,useHistory} from "react-router-dom";
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
@@ -6,11 +6,15 @@ import AuthApi from "../services/Auth";
 
 const SigninForm = () => {
   const history = useHistory();
-
+ const [isLoading,setIsLoading]=useState(false);
   const onFinish = async(values) => {
+
+    setIsLoading(true);
   const response= await AuthApi.login(values);
+  setIsLoading(false);
   console.log("response:" ,response);
   if(!response){
+
     return notification.error({message:"request failed, Network error"});
   
   }
@@ -62,7 +66,7 @@ return notification.error({message:response.data.message})
 
       <Form.Item>
           {/* <Link to="/dashboard"> */}
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button type="primary" htmlType="submit" loading={isLoading} className="login-form-button">
           Log in
         </Button>
           
